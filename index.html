@@ -67,24 +67,25 @@
             />
             <button @click="addItem" type="button" class="btn btn-secundary">+</button>
         </div>
-        <hr v-show="presupuesto > 0"/>
         <!-- Lista -->
         <p v-show="products.length == 0 && presupuesto > 0">Aun no has agregado ningún producto</p>
-        <ul class="listProducts" v-show="presupuesto > 0">
-            <!-- Lista de Pendientes -->
-            <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
-                <span @click="editItem(p.idPto)">✅</span>
-                {{p.title}}
-                <span @click="removeItem(p.idPto)">❌</span>
-            </li>
+        <div class="listBox" v-show="presupuesto > 0">
+            <ul class="listProducts">
+                <!-- Lista de Pendientes -->
+                <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
+                    <span @click="editItem(p.idPto)">✅</span>
+                    {{p.title}}
+                    <span @click="removeItem(p.idPto)">❌</span>
+                </li>
 
-            <!-- Lista de Compras -->
-            <li v-show="handleCompras" v-for="p in ptosComprados" :key="p.idPto">
-                {{p.title}} - ${{formatNum(p.value)}}
-                <span @click="editItem(p.idPto)">✏</span>
-                <span @click="removeItem(p.idPto)">❌</span>
-            </li>
-        </ul>
+                <!-- Lista de Compras -->
+                <li v-show="handleCompras" v-for="p in ptosComprados" :key="p.idPto">
+                    {{p.title}} - ${{formatNum(p.value)}}
+                    <span @click="editItem(p.idPto)">✏</span>
+                    <span @click="removeItem(p.idPto)">❌</span>
+                </li>
+            </ul>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app.js"></script>

@@ -212,12 +212,34 @@ input.sm-input{
 }
 
 /* */
+.listBox{
+  height: 61%;
+  overflow-y:scroll;
+  padding-right: 10px;
+}
+
+.listBox::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  /* display: none; */
+}
+
+.listBox::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 4px;
+}
+
+.listBox::-webkit-scrollbar-thumb:hover {
+  background: var(--second-color);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.listBox::-webkit-scrollbar-thumb:active {
+  background-color: var(--second-color);
+}
 
 .listProducts{
   list-style: none;
-  height: 62%;
-  display: block;
-  overflow-y: scroll;
 }
 
 .listProducts li{
