@@ -246,3 +246,10 @@ input.sm-input{
   padding: 12px 15px;
   border-bottom: 1px solid var(--text-color);
 }
+
+@media (max-width: 600px) {
+  #app{
+    width: 100vw;
+    height: 100vh;
+  }
+}
