@@ -49,13 +49,13 @@ new Vue({
           localStorage.setItem('idPto', this.idPto.toString());
         },
         removeItem(i){
-            if (window.confirm(`¿Realmente quieres eliminar ${this.products[i].idPto} - $${this.formatNum(this.products[i].value)}?`)) {
+            if (window.confirm(`¿Realmente quieres eliminar ${this.products[i].title} - $${this.formatNum(this.products[i].value)}?`)) {
                 this.products.splice(i, 1);
             }
             this.saveItems();
         },
         editItem(i){
-            const newVal = window.prompt(`El nuevo precio de ${this.products[i].idPto} es:`,`${this.formatNum(this.products[i].value)}`);
+            const newVal = window.prompt(`El nuevo precio de ${this.products[i].title} es:`,`${this.formatNum(this.products[i].value)}`);
             if (newVal > 0 && newVal !== null){
                 this.products[i].value = newVal;
                 this.saveItems();

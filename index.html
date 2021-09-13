@@ -34,7 +34,7 @@
             </div>
         </div>
         <!-- Checkbox slider -->
-        <div class="custom-checkbox">
+        <div class="custom-checkbox" v-show="presupuesto > 0">
             <input id="status"
                 v-model="handleCompras"
                 type="checkbox"
@@ -47,7 +47,7 @@
                 </div>
             </label>
         </div>
-        <div class="flexBox"  v-show="presupuesto > 0">
+        <div class="flexBox" v-show="presupuesto > 0">
             <input
                 type="text"
                 v-model="title"
@@ -67,20 +67,20 @@
             />
             <button @click="addItem" type="button" class="btn btn-secundary">+</button>
         </div>
-        <hr/>
+        <hr v-show="presupuesto > 0"/>
         <!-- Lista -->
         <p v-show="products.length == 0 && presupuesto > 0">Aun no has agregado ningún producto</p>
         <ul class="listProducts" v-show="presupuesto > 0">
             <!-- Lista de Pendientes -->
             <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
                 <span @click="editItem(p.idPto)">✅</span>
-                {{p.title}} - {{p.idPto}}
+                {{p.title}}
                 <span @click="removeItem(p.idPto)">❌</span>
             </li>
 
             <!-- Lista de Compras -->
             <li v-show="handleCompras" v-for="p in ptosComprados" :key="p.idPto">
-                {{p.title}} - {{p.idPto}} - ${{formatNum(p.value)}}
+                {{p.title}} - ${{formatNum(p.value)}}
                 <span @click="editItem(p.idPto)">✏</span>
                 <span @click="removeItem(p.idPto)">❌</span>
             </li>
