@@ -87,7 +87,7 @@
                 <ul class="listProducts">
                     <!-- Lista de Pendientes -->
                     <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
-                        <span @click="editItem(p.idPto)">✅</span>
+                        <input type="checkbox" @click="editItem(p.idPto)" />
                         {{p.title}}
                         <span @click="removeItem(p.idPto)">❌</span>
                     </li>
