@@ -65,6 +65,14 @@ new Vue({
             this.presupuesto = document.getElementById("toPresupuesto").value.replace(/[,.]/g, '');
             localStorage.setItem('presupuesto', this.presupuesto);
         },
+        editPresupuesto(){
+            const newVal = window.prompt(`El nuevo presupuesto es:`,`${this.presupuesto}`);
+            if (newVal > 0 && newVal !== null){
+                this.presupuesto = newVal;
+                localStorage.setItem('presupuesto', this.presupuesto);
+            }
+
+        },
         formatNum(val){
             return new Intl.NumberFormat("es-ES").format(val)
         },

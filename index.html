@@ -31,7 +31,7 @@
             <div v-show="presupuesto > 0">
                 <h3>{{ saldoTotal >= 0 ? 'Saldo disponible' : 'Superaste tu presupuesto por'}}: </h3>
                 <h2>${{ saldoTotal >= 0 ? formatNum(saldoTotal) : formatNum(saldoTotal*-1) }}</h2>
-                <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editItem(i)">✏</span></h4>
+                <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editPresupuesto()">✏</span></h4>
             </div>
         </div>
         <div v-show="presupuesto > 0">
