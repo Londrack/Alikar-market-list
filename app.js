@@ -39,8 +39,8 @@ new Vue({
         addItem(){
             this.products.push({title: this.title, value: this.value, idPto: this.idPto});
             this.title = '';
-            this.value = ''; 
-            this.idPto += 1; 
+            this.value = '';
+            this.idPto += 1;
             this.saveItems();
         },
         saveItems() {
@@ -73,6 +73,14 @@ new Vue({
         },
         numberFocus(e){
             e.target.value = e.target.value.replace(/[,.]/g, '');
+        },
+        cleanAll(){
+            if (window.confirm(`¿Realmente quieres eliminar todos los productos?`)) {
+                this.products = [];
+                this.idPto = 0;
+                localStorage.removeItem('products');
+                localStorage.removeItem('idPto');
+            }
         },
     },
     mounted() {

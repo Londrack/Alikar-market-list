@@ -34,59 +34,78 @@
                 <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editItem(i)">✏</span></h4>
             </div>
         </div>
-        <!-- Checkbox slider -->
-        <div class="custom-checkbox" v-show="presupuesto > 0">
-            <input id="status"
-                v-model="handleCompras"
-                type="checkbox"
-                name="status"
-            />
-            <label for="status">
-                <div class="status-switch"
-                    data-unchecked="Pendientes"
-                    data-checked="Compras">
-                </div>
-            </label>
-        </div>
-        <div class="flexBox" v-show="presupuesto > 0">
-            <input
-                type="text"
-                v-model="title"
-                placeholder="Producto"
-                :class="handleCompras ? 'lg-input' : 'xlg-input'"
-                v-on:keyup.enter="addItem"
-            />
-            <input
-                type="number"
-                class="sm-input"
-                @blur="numberBlur"
-                @focus="numberFocus"
-                pattern="\d*"
-                v-model="value"
-                placeholder="Valor"
-                v-show="handleCompras"
-                v-on:keyup.enter="addItem"
-            />
-            <button @click="addItem" type="button" class="btn btn-secundary">+</button>
-        </div>
-        <!-- Lista -->
-        <p v-show="products.length == 0 && presupuesto > 0">Aun no has agregado ningún producto</p>
-        <div class="listBox" v-show="presupuesto > 0">
-            <ul class="listProducts">
-                <!-- Lista de Pendientes -->
-                <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
-                    <span @click="editItem(p.idPto)">✅</span>
-                    {{p.title}}
-                    <span @click="removeItem(p.idPto)">❌</span>
-                </li>
+        <div v-show="presupuesto > 0">
+            <!-- Checkbox slider -->
+            <div class="custom-checkbox">
+                <input id="status"
+                    v-model="handleCompras"
+                    type="checkbox"
+                    name="status"
+                />
+                <label for="status">
+                    <div class="status-switch"
+                        data-unchecked="Pendientes"
+                        data-checked="Compras">
+                    </div>
+                </label>
+            </div>
+            <!-- Form Agregar -->
+            <div class="flexBox">
+                <input
+                    type="text"
+                    v-model="title"
+                    placeholder="Producto"
+                    :class="handleCompras ? 'lg-input' : 'xlg-input'"
+                    v-on:keyup.enter="addItem"
+                />
+                <input
+                    type="number"
+                    class="sm-input"
+                    @blur="numberBlur"
+                    @focus="numberFocus"
+                    pattern="\d*"
+                    v-model="value"
+                    placeholder="Valor"
+                    v-show="handleCompras"
+                    v-on:keyup.enter="addItem"
+                />
+                <button @click="addItem" type="button" class="btn btn-secundary">+</button>
+            </div>
+            <!-- Lista -->
+            <p>
+                {{ (ptosPendientes.length == 0 && !handleCompras)
+                    ? 'Aún no has agregado ningún pendiente'
+                    : (ptosComprados.length == 0 && handleCompras)
+                        ? 'Aún no has agregado ninguna compra'
+                        : ''
+                }}
+            </p>
+            <div class="listBox">
+                <ul class="listProducts">
+                    <!-- Lista de Pendientes -->
+                    <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
+                        <span @click="editItem(p.idPto)">✅</span>
+                        {{p.title}}
+                        <span @click="removeItem(p.idPto)">❌</span>
+                    </li>
 
-                <!-- Lista de Compras -->
-                <li v-show="handleCompras" v-for="p in ptosComprados" :key="p.idPto">
-                    {{p.title}} - ${{formatNum(p.value)}}
-                    <span @click="editItem(p.idPto)">✏</span>
-                    <span @click="removeItem(p.idPto)">❌</span>
-                </li>
-            </ul>
+                    <!-- Lista de Compras -->
+                    <li v-show="handleCompras" v-for="p in ptosComprados" :key="p.idPto">
+                        {{p.title}} - ${{formatNum(p.value)}}
+                        <span @click="editItem(p.idPto)">✏</span>
+                        <span @click="removeItem(p.idPto)">❌</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- clearBtn -->
+            <button
+                v-show="products.length > 0"
+                type="button"
+                @click="cleanAll"
+                class="btn btn-small btn-grey btn-limpiar"
+            >
+                Limpiar
+            </button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
