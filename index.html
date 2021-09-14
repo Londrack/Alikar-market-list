@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de mercado</title>
+    <title>Asistente para listas de mercado</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="centrar-hijo">
@@ -15,7 +15,7 @@
                 <h3>¿Cuál es tu prespuesto para mercar? </h3>
                 <center>
                     <input
-                        type="currency"
+                        type="number"
                         id="toPresupuesto"
                         min="1"
                         pattern="\d*"
@@ -23,6 +23,7 @@
                         @blur="numberBlur"
                         @focus="numberFocus"
                         @keyup.enter="addPresupuesto"
+                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
                     />
                     <button @click="addPresupuesto" type="button" class="btn btn-primary">+</button>
                 </center>
@@ -37,7 +38,8 @@
         <div v-show="presupuesto > 0">
             <!-- Checkbox slider -->
             <div class="custom-checkbox">
-                <input id="status"
+                <input
+                    id="status"
                     v-model="handleCompras"
                     type="checkbox"
                     name="status"
@@ -68,6 +70,7 @@
                     placeholder="Valor"
                     v-show="handleCompras"
                     v-on:keyup.enter="addItem"
+                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
                 />
                 <button @click="addItem" type="button" class="btn btn-secundary">+</button>
             </div>
