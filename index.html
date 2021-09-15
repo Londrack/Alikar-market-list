@@ -36,7 +36,7 @@
                 <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editPresupuesto()"><i class="far fa-edit fa-lg"></i></span></h4>
             </div>
         </div>
-        <div v-show="presupuesto > 0">
+        <template v-show="presupuesto > 0">
             <div class="flexBox">
                 <!-- Checkbox slider -->
                 <div class="custom-checkbox">
@@ -117,7 +117,7 @@
             >
                 Limpiar
             </button>
-        </div>
+        </template>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app.js"></script>
