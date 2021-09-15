@@ -304,6 +304,7 @@ input.sm-input{
 @media (max-width: 600px) {
   #app{
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 60px);
+    border-radius: 0px;
   }
 }
