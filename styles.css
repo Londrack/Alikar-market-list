@@ -60,15 +60,15 @@ input::placeholder{
 }
 
 input.xlg-input{
-  width: 76%;
-}
-
-input.lg-input{
   width: 52%;
 }
 
+input.lg-input{
+  width: 30%;
+}
+
 input.sm-input{
-  width: 23%;
+  width: 18%;
 }
 
 .totalBox{
@@ -130,7 +130,7 @@ input.sm-input{
 .flexBox{
   display:flex;
   justify-content: space-around;
-  padding: 0 0 25px;
+  margin: 25px auto 30px;
 }
 
 .btn{
@@ -168,13 +168,10 @@ input.sm-input{
   right: 30px;
 }
 
-
 /* Check Slider */
-
 .custom-checkbox {
-  width: 80%;
-  height: 30px;
-  margin: 25px auto 30px;
+  width: 24%;
+  height: 28px;
 }
 .custom-checkbox input#status {
   display: none;
@@ -189,7 +186,7 @@ input.sm-input{
   height: 100%;
   position: relative;
   background-color: grey;
-  color: white;
+  color: grey;
   transition: all 0.5s ease;
   padding: 3px;
   border-radius: 20px;
@@ -197,13 +194,13 @@ input.sm-input{
 .custom-checkbox input#status + label > .status-switch:before, .custom-checkbox input#status + label > .status-switch:after {
   border-radius: 18px;
   height: calc(100% - 6px);
-  width: calc(50% - 3px);
+  width: calc(70% - 3px);
   display: flex;
   align-items: center;
   position: absolute;
   justify-content: center;
   transition: all 0.3s ease;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 .custom-checkbox input#status + label > .status-switch:before {
   background-color: white;
@@ -226,7 +223,7 @@ input.sm-input{
 }
 .custom-checkbox input#status:checked + label > .status-switch:before {
   /* color: #40c253; */
-  left: 50%;
+  left: 30%;
   content: attr(data-checked);
 }
 

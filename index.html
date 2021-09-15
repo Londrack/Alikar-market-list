@@ -36,23 +36,23 @@
             </div>
         </div>
         <div v-show="presupuesto > 0">
-            <!-- Checkbox slider -->
-            <div class="custom-checkbox">
-                <input
-                    id="status"
-                    v-model="handleCompras"
-                    type="checkbox"
-                    name="status"
-                />
-                <label for="status">
-                    <div class="status-switch"
-                        data-unchecked="Pendientes"
-                        data-checked="Compras">
-                    </div>
-                </label>
-            </div>
-            <!-- Form Agregar -->
             <div class="flexBox">
+                <!-- Checkbox slider -->
+                <div class="custom-checkbox">
+                    <input
+                        id="status"
+                        v-model="handleCompras"
+                        type="checkbox"
+                        name="status"
+                    />
+                    <label for="status">
+                        <div class="status-switch"
+                            data-unchecked="Pendiente"
+                            data-checked="Compra">
+                        </div>
+                    </label>
+                </div>
+                <!-- Form Agregar -->
                 <input
                     type="text"
                     v-model="title"
@@ -86,14 +86,16 @@
             <div class="listBox">
                 <ul class="listProducts">
                     <!-- Lista de Pendientes -->
-                    <li v-show="!handleCompras" v-for="p in ptosPendientes" :key="p.idPto">
+                    <li v-for="p in ptosPendientes" :key="p.idPto">
+                        <!-- v-show="!handleCompras" -->
                         <input type="checkbox" @click="editItem(p.idPto)" />
                         {{p.title}}
                         <span @click="removeItem(p.idPto)">❌</span>
                     </li>
 
                     <!-- Lista de Compras -->
-                    <li v-show="handleCompras" v-for="p in ptosComprados" :key="p.idPto">
+                    <li v-for="p in ptosComprados" :key="p.idPto">
+                        <!-- v-show="handleCompras" -->
                         {{p.title}} - ${{formatNum(p.value)}}
                         <span @click="editItem(p.idPto)">✏</span>
                         <span @click="removeItem(p.idPto)">❌</span>
