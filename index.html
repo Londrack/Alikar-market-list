@@ -90,8 +90,8 @@
                     <li v-for="p in ptosPendientes" :key="p.idPto">
                         <!-- <input type="checkbox" @click="editItem(p.idPto)" /> -->
                         <span @click="editItem(p.idPto)">
-                            <i class="mr-1 color-sec far fa-circle fa-lg"></i>
                             {{p.title}}
+                            <i class="ml-2 color-sec fas fa-cart-plus fa-lg"></i>
                         </span>
                         <span @click="removeItem(p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
                     </li>
