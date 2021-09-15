@@ -4,6 +4,7 @@
   --main-bg-color: #34323d;
   --main-color:#8527e2;
   --second-color:#0093E9;
+  --third-color:#C850C0;
 
   --text-color:#cbc8d4;
 
@@ -44,6 +45,41 @@ body{
   -moz-box-shadow: 3px 3px 19px -4px rgba(0,0,0,0.58);
   box-shadow: 3px 3px 19px -4px rgba(0,0,0,0.58);
   position: relative;
+}
+
+.color-sec{
+  color:var(--second-color)
+}
+
+.color-third{
+  color:var(--third-color)
+}
+.color-grey{
+  color:#5a616e
+}
+
+.ml-0{
+  margin-left: 0;
+}
+
+.ml-1{
+  margin-left: 0.25em;
+}
+
+.ml-2{
+  margin-left: 0.5em;
+}
+
+.mr-0{
+  margin-right: 0;
+}
+
+.mr-1{
+  margin-right: 0.25em;
+}
+
+.mr-2{
+  margin-right: 0.5em;
 }
 
 input{
@@ -261,6 +297,8 @@ input.sm-input{
 .listProducts li{
   padding: 12px 15px;
   border-bottom: 1px solid var(--text-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 600px) {

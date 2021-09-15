@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistente para listas de mercado</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/2e861cfa3a.js" crossorigin="anonymous"></script>
 </head>
 <body class="centrar-hijo">
     <div id="app">
@@ -32,7 +33,7 @@
             <div v-show="presupuesto > 0">
                 <h3>{{ saldoTotal >= 0 ? 'Saldo disponible' : 'Superaste tu presupuesto por'}}: </h3>
                 <h2>${{ saldoTotal >= 0 ? formatNum(saldoTotal) : formatNum(saldoTotal*-1) }}</h2>
-                <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editPresupuesto()">✏</span></h4>
+                <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editPresupuesto()"><i class="far fa-edit fa-lg"></i></span></h4>
             </div>
         </div>
         <div v-show="presupuesto > 0">
@@ -87,18 +88,23 @@
                 <ul class="listProducts">
                     <!-- Lista de Pendientes -->
                     <li v-for="p in ptosPendientes" :key="p.idPto">
-                        <!-- v-show="!handleCompras" -->
-                        <input type="checkbox" @click="editItem(p.idPto)" />
-                        {{p.title}}
-                        <span @click="removeItem(p.idPto)">❌</span>
+                        <!-- <input type="checkbox" @click="editItem(p.idPto)" /> -->
+                        <span @click="editItem(p.idPto)">
+                            <i class="mr-1 color-sec far fa-circle fa-lg"></i>
+                            {{p.title}}
+                        </span>
+                        <span @click="removeItem(p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
                     </li>
 
                     <!-- Lista de Compras -->
                     <li v-for="p in ptosComprados" :key="p.idPto">
-                        <!-- v-show="handleCompras" -->
-                        {{p.title}} - ${{formatNum(p.value)}}
-                        <span @click="editItem(p.idPto)">✏</span>
-                        <span @click="removeItem(p.idPto)">❌</span>
+                        <span>
+                            <i class="fas fa-check-circle fa-lg mr-1"></i>
+                            {{p.title}} - ${{formatNum(p.value)}}
+
+                            <span class="ml-2" @click="editItem(p.idPto)"><i class="color-sec far fa-edit fa-lg"></i></span>
+                        </span>
+                        <span @click="removeItem(p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
                     </li>
                 </ul>
             </div>
