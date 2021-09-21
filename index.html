@@ -10,10 +10,20 @@
 </head>
 <body class="centrar-hijo">
     <div id="app">
+        <modal
+        :target="targetModal"
+        v-show="showModal"
+        @close-modal="toggleModal"
+        @function-modal="this[functionModal]"
+        >
+            <template v-slot:title>{{titleModal}}</template>
+            <template v-slot:content><div v-html="contentModal"></div></template>
+        </modal>
+        <!-- Header -->
         <div class="totalBox" :class="saldoTotal < 0 && 'alertRed'">
             <!-- Presupuesto no definido -->
             <div v-show="presupuesto == 0">
-                <h3>¿Cuál es tu prespuesto para mercar? </h3>
+                <h3>¿Cuál es  prespuesto para mercar? </h3>
                 <center>
                     <input
                         type="number"
@@ -33,7 +43,7 @@
             <div v-show="presupuesto > 0">
                 <h3>{{ saldoTotal >= 0 ? 'Saldo disponible' : 'Superaste tu presupuesto por'}}: </h3>
                 <h2>${{ saldoTotal >= 0 ? formatNum(saldoTotal) : formatNum(saldoTotal*-1) }}</h2>
-                <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="editPresupuesto()"><i class="far fa-edit fa-lg"></i></span></h4>
+                <h4>Presupuesto: ${{ formatNum(presupuesto) }} <span @click="modalConstructor(modalEditPresupuesto, 'Editar presupuesto')"><i class="far fa-edit fa-lg"></i></span></h4>
             </div>
         </div>
         <template v-if="presupuesto > 0">
@@ -89,11 +99,11 @@
                     <!-- Lista de Pendientes -->
                     <li v-for="p in ptosPendientes" :key="p.idPto">
                         <!-- <input type="checkbox" @click="editItem(p.idPto)" /> -->
-                        <span @click="editItem(p.idPto)">
-                            {{p.title}}
+                        <span @click="modalConstructor(modalEditItem, p.title, p.idPto)">
+                            {{p.title}} - {{p.idPto}}
                             <i class="ml-2 color-sec fas fa-cart-arrow-down fa-lg"></i>
                         </span>
-                        <span @click="removeItem(p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
+                        <span @click="modalConstructor(modalRemoveItem, `Eliminar ${p.title}`, p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
                     </li>
 
                     <!-- Lista de Compras -->
@@ -102,9 +112,9 @@
                             <i class="fas fa-check-circle fa-lg mr-1"></i>
                             {{p.title}} - ${{formatNum(p.value)}}
 
-                            <span class="ml-2" @click="editItem(p.idPto)"><i class="color-sec far fa-edit fa-lg"></i></span>
+                            <span class="ml-2" @click="modalConstructor(modalEditItem, p.title, p.idPto)"><i class="color-sec far fa-edit fa-lg"></i></span>
                         </span>
-                        <span @click="removeItem(p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
+                        <span @click="modalConstructor(modalRemoveItem, `Eliminar ${p.title}`, p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
                     </li>
                 </ul>
             </div>
@@ -115,7 +125,7 @@
                 @click="cleanAll"
                 class="btn btn-small btn-grey btn-limpiar"
             >
-                Limpiar
+                Borrar lista
             </button>
         </template>
     </div>

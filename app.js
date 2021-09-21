@@ -1,3 +1,18 @@
+Vue.component('modal', {
+    props:['target'],
+    template: `
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <h3><slot name="title"></slot></h3>
+            <slot name="content"></slot>
+            <button class="saveBtn" @click="$emit('function-modal', target)">Guardar</button>
+            <div class="closeBtn" @click="$emit('close-modal')"><i class="color-grey far fa-times-circle" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </div>`
+})
+
 new Vue({
     el: '#app',
 
@@ -9,6 +24,13 @@ new Vue({
           idPto: 0,
           presupuesto: 0,
           handleCompras: false,
+
+          showModal: false,
+          titleModal:'',
+          contentModal:'',
+          functionModal:'saveItems',
+          targetModal: '0',
+
       }
     },
 
@@ -33,6 +55,29 @@ new Vue({
                 return u.value > 0
             })
         },
+        modalEditItem(){
+            return {
+                content: `<label class="mr-3">Precio:</label>
+                    <input
+                        type="number"
+                        id="newVal"
+                        step="1000"
+                    />`,
+                fc: 'editItem',
+            }
+        },
+        modalRemoveItem(){
+            return {
+                content: `<p>¿Realmente deseas eliminar este producto?</p>`,
+                fc: 'removeItem',
+            }
+        },
+        modalEditPresupuesto(){
+            return {
+                content: `<input type="number" id="newVal" />`,
+                fc: 'editPresupuesto',
+            }
+        }
     },
 
     methods: {
@@ -49,28 +94,40 @@ new Vue({
           localStorage.setItem('idPto', this.idPto.toString());
         },
         removeItem(i){
-            if (window.confirm(`¿Realmente quieres eliminar ${this.products[i].title} - $${this.formatNum(this.products[i].value)}?`)) {
-                this.products.splice(i, 1);
-            }
+            this.products.splice(i, 1);
             this.saveItems();
+            this.toggleModal()
+        },
+        modalConstructor(modalInfo, title, ptoId =  false){
+            const index = (ptoId) ? this.products.map(function(e) { return e.idPto; }).indexOf(ptoId) : '';
+            this.targetModal = index;
+            this.titleModal = title;
+            this.contentModal = modalInfo.content;
+            this.functionModal = modalInfo.fc;
+            this.toggleModal();
         },
         editItem(i){
-            const newVal = window.prompt(`El nuevo precio de ${this.products[i].title} es:`,`${this.formatNum(this.products[i].value)}`);
+            const newVal = document.getElementById("newVal").value;
             if (newVal > 0 && newVal !== null){
                 this.products[i].value = newVal;
                 this.saveItems();
             }
+            this.toggleModal()
+            document.getElementById("newVal").value = '';
         },
         addPresupuesto(){
             this.presupuesto = document.getElementById("toPresupuesto").value.replace(/[,.]/g, '');
             localStorage.setItem('presupuesto', this.presupuesto);
         },
         editPresupuesto(){
-            const newVal = window.prompt(`El nuevo presupuesto es:`,`${this.presupuesto}`);
+            // const newVal = window.prompt(`El nuevo presupuesto es:`,`${this.presupuesto}`);
+            const newVal = document.getElementById("newVal").value;
             if (newVal > 0 && newVal !== null){
                 this.presupuesto = newVal;
                 localStorage.setItem('presupuesto', this.presupuesto);
             }
+            this.toggleModal();
+            document.getElementById("newVal").value = '';
 
         },
         formatNum(val){
@@ -90,6 +147,9 @@ new Vue({
                 localStorage.removeItem('idPto');
             }
         },
+        toggleModal(){
+            this.showModal = !this.showModal;
+        }
     },
     mounted() {
         //Productos
