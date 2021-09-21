@@ -100,7 +100,7 @@
                     <li v-for="p in ptosPendientes" :key="p.idPto">
                         <!-- <input type="checkbox" @click="editItem(p.idPto)" /> -->
                         <span @click="modalConstructor(modalEditItem, p.title, p.idPto)">
-                            {{p.title}} - {{p.idPto}}
+                            {{p.title}}
                             <i class="ml-2 color-sec fas fa-cart-arrow-down fa-lg"></i>
                         </span>
                         <span @click="modalConstructor(modalRemoveItem, `Eliminar ${p.title}`, p.idPto)"><i class="color-grey far fa-times-circle fa-lg"></i></span>
