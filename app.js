@@ -1,6 +1,6 @@
 Vue.component('modal', {
     props:['target'],
-    template: `
+    template: /* vue-html */`
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
