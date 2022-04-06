@@ -7,7 +7,9 @@
     <title>Asistente para listas de mercado</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/2e861cfa3a.js" crossorigin="anonymous"></script>
-    <link rel="manifest" href="./favicon/manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="./favicon/apple-icon-180x180.png">
 </head>
 <body class="centrar-hijo">
     <div id="app">
@@ -24,7 +26,7 @@
         <div class="totalBox" :class="saldoTotal < 0 && 'alertRed'">
             <!-- Presupuesto no definido -->
             <div v-show="presupuesto == 0">
-                <h3>¿Cuál es  prespuesto para mercar? </h3>
+                <h3>¿Cuál es tu presupuesto para mercar? </h3>
                 <center>
                     <input
                         type="number"
